@@ -148,6 +148,7 @@ def main():
   return {
     // Auto-generate name from eval template
     name: editMode ? evalConfig?.name : getEvalBaseName(evalConfig),
+    description: editMode ? evalConfig?.description || "" : "",
     saveAsTemplate: false,
     config: {
       mapping,
@@ -349,6 +350,7 @@ const EvaluationConfigureFormChild = ({
       mapping: data.config.mapping,
       id: selectedEval?.id,
       name: data.name,
+      description: data.description,
     };
     setEvalsConfigs([...evalsConfigs, config]);
     if (handleLabelsAdd) handleLabelsAdd(null);
@@ -421,6 +423,14 @@ const EvaluationConfigureFormChild = ({
             text={selectedEval?.description || evalConfig?.description}
           />
         }
+      />
+      <FormTextFieldV2
+        fieldName="description"
+        control={control}
+        label="Description"
+        placeholder="Enter description"
+        multiline
+        minRows={3}
       />
       <ShowComponent condition={requiredKeys?.length > 0}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
